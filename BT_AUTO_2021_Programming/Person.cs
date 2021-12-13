@@ -26,7 +26,7 @@ namespace BT_AUTO_2021_Programming
 
         public void SetName(string personName)
         {
-            name = personName;
+            this.name = personName;
         }
         public void SetSex(char sex)
         {
@@ -36,7 +36,7 @@ namespace BT_AUTO_2021_Programming
         {
             Console.WriteLine("Name of the persone is {0}", name);
             Console.WriteLine("-> Current state for hungry is {0}", isHungry);
-            Console.WriteLine("", name);
+            Console.WriteLine("Person sex is {0}", sex);
         }
     }
 

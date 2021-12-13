@@ -6,11 +6,11 @@ namespace BT_AUTO_2021_Programming
     {
         static void Main(string[] args)
         {
-            //Course01(args);
-            Course02(args);
+            Course01(args);
+           // Course02(args);
 
         }
-    static void Course01(string[] args)
+        static void Course01(string[] args)
         {
             const int MAX_SIZE = 100;
             const double PI = 3.141592;
@@ -204,7 +204,60 @@ namespace BT_AUTO_2021_Programming
                 counter++;
             }
             while (counter <= MAX_NUMBER);
+
+            for (counter = 0; counter <= MAX_NUMBER; counter++)
+            {
+                Console.WriteLine("Current number is :" + counter);
+                Console.WriteLine("Current number is :{0}", counter);
+            }
+
+            foreach (string argument in args)//se foloseste la parcurgerea de liste de valori
+            {
+                Console.WriteLine("The argument is: {0}", argument);
+            }
+            //se mai poate scrie cu for (ex mai jos)
+
+            /* for(counter=0; counter < args.Length; counter++)
+             {
+                 Console.WriteLine("The argument is: {0}", argument);
+             }*/
+
+            foreach (string yr in args)
+            {
+                int febDays = 28;
+                int year = int.Parse(yr);
+
+
+                /* if(year %4 == 0)
+                 {
+                     if (year % 100 == 0 && year % 400 != 0)
+                     {
+                         febDays = 29;
+                     }
+                     if (year % 100 != 0)
+                     {
+                         febDays = 29;
+                     }
+                 }*/
+                // formaula simplificata
+                if (year < 1900 || year > 2016)
+                {
+                    Console.WriteLine("Year is out of valid bounds (1900-206)");
+                }
+                else
+                {
+                    if ((year % 4 == 0 && year % 100 == 0 && year % 400 != 0) || (year % 4 == 0 && year % 100 != 0))
+                    {
+                        febDays = 29;
+
+                    }
+                    Console.WriteLine("Febriary has {0} days for year {1}", febDays, year);
+                }
+            }
         }
+
+
+     
   
     static void Course02(string[] args)
         {
@@ -222,16 +275,22 @@ namespace BT_AUTO_2021_Programming
             {
                 Circle c = new Circle();
                 c.SetRadius(Double.Parse(p));
+
                 Square s = new Square();
                 s.SetSide(Double.Parse(p));
+
+                Rectangle r = new Rectangle();
+                r.SetSize(Double.Parse(p), Double.Parse(p));
+
                 c.PrintCircle();
                 s.PrintSquare();
+                r.PrintRectangle();
 
             }
 
             Person p1 = new Person();
-            p1.SetName("Alex");
-            p1.SetSex('a');
+            p1.SetName("Stefi");
+            p1.SetSex('f');
             p1.Eat();
             p1.Run();
             p1.Eat();
