@@ -6,7 +6,12 @@ namespace BT_AUTO_2021_Programming
     {
         static void Main(string[] args)
         {
+            //Course01(args);
+            Course02(args);
 
+        }
+    static void Course01(string[] args)
+        {
             const int MAX_SIZE = 100;
             const double PI = 3.141592;
             const int MAX_NUMBER = 5;
@@ -62,16 +67,16 @@ namespace BT_AUTO_2021_Programming
             Console.WriteLine(++x);// a incrementat cu o unitate si apoi a afisat
 
             //Console.WriteLine((x == a));// rezulattul este un boolean
-           // Console.WriteLine((x > a));
-           // Console.WriteLine((x < a));
-           // Console.WriteLine(!(x != a));
-           // Console.WriteLine((x < a) || (x == a));//se folosesc la conditii (if)
+            // Console.WriteLine((x > a));
+            // Console.WriteLine((x < a));
+            // Console.WriteLine(!(x != a));
+            // Console.WriteLine((x < a) || (x == a));//se folosesc la conditii (if)
 
-            int number =  4;
+            int number = 4;
             Console.WriteLine("Number tested is" + number);
 
             if (number >= 0)
-            {   
+            {
                 Console.WriteLine("Number is positive");
             }
             else
@@ -88,7 +93,7 @@ namespace BT_AUTO_2021_Programming
                 Console.WriteLine("Old number!");
             }
 
-            if (number <=40 && number >=0)
+            if (number <= 40 && number >= 0)
             {
                 if (number <= 20)
                 {
@@ -107,12 +112,12 @@ namespace BT_AUTO_2021_Programming
             //oneline if/else
             String message = (number % 2 == 0) ? "Even" : "Old";
             Console.WriteLine(message);
-          
-            if (number ==1)
+
+            if (number == 1)
             {
                 Console.WriteLine("Monday");
             }
-            if (number ==2)
+            if (number == 2)
             {
                 Console.WriteLine("Tuesday");
             }
@@ -128,7 +133,7 @@ namespace BT_AUTO_2021_Programming
             {
                 Console.WriteLine("Friday");
             }
-            if (number == 6 )
+            if (number == 6)
             {
                 Console.WriteLine("Saturday");
             }
@@ -136,12 +141,12 @@ namespace BT_AUTO_2021_Programming
             {
                 Console.WriteLine("Sunday");
             }
-            if (number <1 || number>7)
+            if (number < 1 || number > 7)
             {
                 Console.WriteLine("Sorry not a valid day!");
             }
 
-            switch(number)//switch functioneaza doar pentru valori punctuale
+            switch (number)//switch functioneaza doar pentru valori punctuale
             {
                 case 1:
                     {
@@ -199,6 +204,44 @@ namespace BT_AUTO_2021_Programming
                 counter++;
             }
             while (counter <= MAX_NUMBER);
+        }
+  
+    static void Course02(string[] args)
+        {
+            Circle c1 = new Circle();//circle este o clasa c1 este un obiec (creat din clada cu cuvantul cheie new),
+            Circle c2;//c2 will be null
+            c1.SetRadius(10);
+            /* double area = c1.GetArea();*/
+            /* Console.WriteLine(c1.GetArea());*/
+            c1.PrintCircle();
+            Circle c3 = new Circle();
+            c3.SetRadius(5);
+            /* Console.WriteLine(c3.GetArea());*/
+            c3.PrintCircle();
+            foreach (string p in args)
+            {
+                Circle c = new Circle();
+                c.SetRadius(Double.Parse(p));
+                Square s = new Square();
+                s.SetSide(Double.Parse(p));
+                c.PrintCircle();
+                s.PrintSquare();
+
+            }
+
+            Person p1 = new Person();
+            p1.SetName("Alex");
+            p1.SetSex('a');
+            p1.Eat();
+            p1.Run();
+            p1.Eat();
+            p1.PrintPerson();
+
+       
+
+        Rectangle r1 = new Rectangle();
+            r1.SetSize(2, 3);
+            r1.PrintRectangle();
 
 
         }
