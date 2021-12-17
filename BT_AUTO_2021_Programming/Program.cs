@@ -6,10 +6,10 @@ namespace BT_AUTO_2021_Programming
     {
         static void Main(string[] args)
         {
-          //Course01(args);
-          //Course02(args);
-          Course03(args);
-
+            //Course01(args);
+            //Course02(args);
+            //Course03(args);
+            Course04();
         }
 
         static void Course01(string[] args)
@@ -258,10 +258,7 @@ namespace BT_AUTO_2021_Programming
             }
         }
 
-
-     
-  
-    static void Course02(string[] args)
+        static void Course02(string[] args)
         {
             Circle c1 = new Circle();//circle este o clasa c1 este un obiec (creat din clada cu cuvantul cheie new),
             Circle c2;//c2 will be null
@@ -298,16 +295,16 @@ namespace BT_AUTO_2021_Programming
             p1.Eat();
             p1.PrintPerson();
 
-       
 
-        Rectangle r1 = new Rectangle();
+
+            Rectangle r1 = new Rectangle();
             r1.SetSize(2, 3);
             r1.PrintRectangle();
 
 
         }
 
-    static void Course03(string[] args)
+        static void Course03(string[] args)
         {
             //ComputeConversion(args);
             CurrencyCalculator(156, "USD", 4.3734);
@@ -317,12 +314,87 @@ namespace BT_AUTO_2021_Programming
             GuessNumber(rnd.Next(1, 1000));
         }
 
-        static bool IsOddNumber(int number)
+        static void Course04()
+        {
+            DrawFullShape(5, 3);
+            Console.WriteLine();
+            DrawFullShape2(5, 3);
+            Console.WriteLine();
+            DrawShapeOutline(14, 22);
+            Console.WriteLine();
+
+            Circle c1 = new Circle();// instantiate c1 with default (no params)
+            Circle c2 = new Circle(10);
+            c1.PrintCircle();
+            c2.PrintCircle();
+
+            Person p1 = new Person();
+            Person p2 = new Person("Stefi", 'f',new string[] { "Romana" }, false, new DateTime());
+            p1.PrintPerson;
+            p2.PrintPerson;
+
+
+            
+         }
+
+        public static void DrawShapeOutline(int width, int height)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                for (int i = 0; i < width; i++)
+                {
+                   if (j==0 || j == height - 1)
+                    {
+                        Console.Write("*");
+                    }
+                    else
+                    {
+                        if (i==0 || i== width - 1)
+                        {
+                            Console.WriteLine("*");
+                        }
+                        else
+                        {
+                            Console.WriteLine(" ");
+                        }
+                    }
+                }
+
+            }
+        }
+
+        public static void DrawFullShape(int width, int height)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                for (int i = 0; i< width; i++)
+                {
+                    Console.Write("*");
+                }
+                Console.WriteLine();
+            }
+         }
+
+
+        public static void DrawFullShape2(int width, int height)
+        {
+            string s = "";          
+                for (int i = 0; i < width; i++)
+                {
+                    s = "*";
+                }
+                for(int j = 0; j < width; j++)
+                {
+                    Console.WriteLine(s);
+                }
+        }
+
+     static bool IsOddNumber(int number)
         {
              return number % 2 != 0;
         }
 
-        static int TestValue(int testval, int target)
+     static int TestValue(int testval, int target)
         { 
             if (testval < target)
             {
@@ -337,7 +409,7 @@ namespace BT_AUTO_2021_Programming
             return 0;
         }
 
-        static void GuessNumber (int n)
+     static void GuessNumber (int n)
         { int currentNumber = 0;
             do
             {
@@ -348,13 +420,13 @@ namespace BT_AUTO_2021_Programming
         }
 
 
-        static Shape GetShape(int x, int y, double a, char t, string s)
+     static Shape GetShape(int x, int y, double a, char t, string s)
         {
             Console.WriteLine(x);
             return new Shape();
         }
 
-        static string ConcatenateStrings(string[] args)
+     static string ConcatenateStrings(string[] args)
         {
             string returnString = "";
 
@@ -365,7 +437,7 @@ namespace BT_AUTO_2021_Programming
             return returnString;
         }
 
-           static public void ComputeConversion(string[] args)
+     static public void ComputeConversion(string[] args)
         {
             if (args.Length != 3)
             {
@@ -378,7 +450,7 @@ namespace BT_AUTO_2021_Programming
             }
         }
 
-        static void CurrencyCalculator(double amount, string currency, double conversionRate)//semnatura functiei
+     static void CurrencyCalculator(double amount, string currency, double conversionRate)//semnatura functiei
         {
             Console.WriteLine("By converting {0} {1} into RON we obtain {2} RON", amount, currency, amount * conversionRate);
         }
