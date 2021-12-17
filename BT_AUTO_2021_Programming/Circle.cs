@@ -24,14 +24,12 @@ namespace BT_AUTO_2021_Programming
         }
         public double GetArea()
         {
-          //  Math PI
-          //  Math PI
             return Math.PI * Math.Pow(radius, 2);
         }
 
         public void PrintCircle()
         {
-            Console.WriteLine("Circle sith radius {0} has the area {1}", radius, GetArea());
+            Console.WriteLine("Circle with radius {0} has the area {1}", radius, GetArea());
         }
     }
 }

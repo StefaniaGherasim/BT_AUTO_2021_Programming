@@ -322,52 +322,46 @@ namespace BT_AUTO_2021_Programming
             Console.WriteLine();
             DrawShapeOutline(14, 22);
             Console.WriteLine();
+            DrawShapeOutline2(14, 22);
+            Console.WriteLine();
+            DrawShapeCorners(10, 13);
+            Console.WriteLine();
+            DrawShapeCorners2(10, 13);
+            Console.WriteLine();
 
-            Circle c1 = new Circle();// instantiate c1 with default (no params)
-            Circle c2 = new Circle(10);
+            Circle c1 = new Circle();// instantiate c1 with default (no params) constructor
+            Circle c2 = new Circle(10);//instantiate c2 with constructor having 1 double parameter
             c1.PrintCircle();
             c2.PrintCircle();
 
             Person p1 = new Person();
-            Person p2 = new Person("Stefi", 'f',new string[] { "Romana" }, false, new DateTime());
-            p1.PrintPerson;
-            p2.PrintPerson;
+            Person p2 = new Person("Stefi", 'f', new string[] { "Romana" }, false, new DateTime());
+            p1.PrintPerson();
+            p2.PrintPerson();
 
+            Rectangle r1 = new Rectangle(2, 7);
+            r1.PrintRectangle();
 
-            
-         }
+            Square s1 = new Square(6);
+            s1.PrintSquare();
 
-        public static void DrawShapeOutline(int width, int height)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                for (int i = 0; i < width; i++)
-                {
-                   if (j==0 || j == height - 1)
-                    {
-                        Console.Write("*");
-                    }
-                    else
-                    {
-                        if (i==0 || i== width - 1)
-                        {
-                            Console.WriteLine("*");
-                        }
-                        else
-                        {
-                            Console.WriteLine(" ");
-                        }
-                    }
-                }
+            StructExample se = new StructExample();
+            StructExample.MyStruct myStruct = new StructExample.MyStruct();
+            myStruct.Assign(10, "abc");
+            Console.WriteLine(myStruct.ComputeSum());
 
-            }
+            StructExample.Rectangle3d r2 = new StructExample.Rectangle3d();
+            r2.Assign(2, 5, 7);
+            Console.WriteLine(r2.GetVolume());
+
         }
+
 
         public static void DrawFullShape(int width, int height)
         {
             for (int j = 0; j < height; j++)
             {
-                for (int i = 0; i< width; i++)
+                for (int i = 0; i< width; i++)//this will print a single line with * counting width
                 {
                     Console.Write("*");
                 }
@@ -375,26 +369,146 @@ namespace BT_AUTO_2021_Programming
             }
          }
 
-
         public static void DrawFullShape2(int width, int height)
         {
-            string s = "";          
+            String s = "";
+            for (int i = 0; i < width; i++)//this will print a single line with * counting width
+            {
+                s += "*";
+            }
+
+            for (int j = 0; j < height; j++)
+            {
+                
+                Console.WriteLine(s);
+            }
+        }
+
+        public static void DrawShapeOutline(int width, int height)
+        {
+            for (int j = 0; j < height; j++)
+            {
                 for (int i = 0; i < width; i++)
                 {
-                    s = "*";
+                    if (j == 0 || j == height - 1)
+                    {
+                        Console.Write("*");
+                    }
+                    else
+                    {
+                        if (i == 0 || i == width - 1)
+                        {
+                            Console.Write("*");
+                        }
+                        else
+                        {
+                            Console.Write(" ");
+                        }
+                    }
+                 
                 }
-                for(int j = 0; j < width; j++)
+                Console.WriteLine();
+            }
+        }
+
+        public static void DrawShapeOutline2(int width, int height)
+        {
+            String s = "";
+            String s1 = "";
+
+            for (int i = 0; i < width; i++)//this will print a single line with * counting width
+            {
+                s += "*";
+                if (i == 0 || i == width - 1)
+                {
+                    s1 += "*";
+                }
+                else
+                {
+                    s1 += " ";
+                }
+            }
+
+            for (int j = 0; j < height; j++)
+            {
+                if (j == 0 || j == height - 1)
                 {
                     Console.WriteLine(s);
                 }
+                else
+                {
+                    Console.WriteLine(s1);
+                }
+
+            }
         }
 
-     static bool IsOddNumber(int number)
+        public static void DrawShapeCorners(int width, int height)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                for (int i = 0; i < width; i++)//this will print a single line with * counting width
+                {
+                    // if ((j==0 && i==0) || (j==0 && i== width-1) || (j== height-1 && i ==0) || (j==height-1 && i==width-1))
+                    if (j == 0 || j == height - 1)
+                    {
+                        if (i == 0 || i == width - 1)
+                        {
+                            Console.Write("*");
+                        }
+                        else
+                        {
+                            Console.Write(" ");
+                        }
+
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public static void DrawShapeCorners2(int width, int height)
+        {
+            String s = "";
+            String s1 = "";
+
+            for (int i = 0; i < width; i++)//this will print a single line with * counting width
+            {
+                s += " ";
+                if (i == 0 || i == width - 1)
+                {
+                    s1 += "*";
+                }
+                else
+                {
+                    s1 += " ";
+                }
+            }
+
+            for (int j = 0; j < height; j++)
+            {
+                if (j == 0 || j == height - 1)
+                {
+                    Console.WriteLine(s1);
+                }
+                else
+                {
+                    Console.WriteLine(s);
+                }
+
+            }
+        }
+
+        static bool IsOddNumber(int number)
         {
              return number % 2 != 0;
         }
 
-     static int TestValue(int testval, int target)
+        static int TestValue(int testval, int target)
         { 
             if (testval < target)
             {
@@ -409,7 +523,7 @@ namespace BT_AUTO_2021_Programming
             return 0;
         }
 
-     static void GuessNumber (int n)
+        static void GuessNumber (int n)
         { int currentNumber = 0;
             do
             {
@@ -419,14 +533,13 @@ namespace BT_AUTO_2021_Programming
             while (TestValue(currentNumber, n) != 0);
         }
 
-
-     static Shape GetShape(int x, int y, double a, char t, string s)
+        static Shape GetShape(int x, int y, double a, char t, string s)
         {
             Console.WriteLine(x);
             return new Shape();
         }
 
-     static string ConcatenateStrings(string[] args)
+        static string ConcatenateStrings(string[] args)
         {
             string returnString = "";
 
@@ -437,7 +550,7 @@ namespace BT_AUTO_2021_Programming
             return returnString;
         }
 
-     static public void ComputeConversion(string[] args)
+        static public void ComputeConversion(string[] args)
         {
             if (args.Length != 3)
             {
@@ -450,7 +563,7 @@ namespace BT_AUTO_2021_Programming
             }
         }
 
-     static void CurrencyCalculator(double amount, string currency, double conversionRate)//semnatura functiei
+        static void CurrencyCalculator(double amount, string currency, double conversionRate)//semnatura functiei
         {
             Console.WriteLine("By converting {0} {1} into RON we obtain {2} RON", amount, currency, amount * conversionRate);
         }

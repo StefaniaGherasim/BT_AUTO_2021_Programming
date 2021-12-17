@@ -4,9 +4,9 @@ using System.Text;
 
 namespace BT_AUTO_2021_Programming
 {
-    class StructExample
+    public class StructExample
     {
-        struct MyStruct
+        public struct MyStruct
         {
             int number;
             string teststring;
@@ -17,7 +17,7 @@ namespace BT_AUTO_2021_Programming
                 this.teststring = teststring;
             }
 
-            ComputeSum()
+            public int ComputeSum()
             {
                 int sum = 0;
                 for (int i = 0; i < number; i++)
@@ -30,7 +30,7 @@ namespace BT_AUTO_2021_Programming
 
             }
         }
-        public struct Rectangle
+        public struct Rectangle3d
         {
             double l;
             double L;
@@ -42,12 +42,22 @@ namespace BT_AUTO_2021_Programming
                 this.L = L;
                 this.h = h;
             }
-            public int GetVertices
+            public int GetVertices()
             {
+                return 12;
+            }
 
+            public double GetArea()
+            {
+                return 4 * L * h + 2 * L * l;
+            }
+
+            public double GetVolume()
+            {
+                return l * L * h;
             }
         }
-    }
 
+    }
 }
 

@@ -15,6 +15,12 @@ namespace BT_AUTO_2021_Programming
             this.width = width;
         }
 
+        public Rectangle()
+        {
+
+        }
+          
+
         public void SetSize(double length, double width)
         {
             this.length = length;
