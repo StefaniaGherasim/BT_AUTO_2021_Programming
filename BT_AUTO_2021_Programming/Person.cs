@@ -29,7 +29,7 @@ namespace BT_AUTO_2021_Programming
 
         public void Eat()
         {
-            Console.WriteLine("The persone is eating...");
+            Console.WriteLine("The persone is eating.");
             isHungry = false;
         }
 
