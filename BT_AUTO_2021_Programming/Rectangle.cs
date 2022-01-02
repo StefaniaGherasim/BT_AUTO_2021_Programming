@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BT_AUTO_2021_Programming
 {
-    class Rectangle
+    class Rectangle : Shape
     {
         double length;
         double width;
@@ -26,7 +26,7 @@ namespace BT_AUTO_2021_Programming
             this.length = length;
             this.width = width;
         }
-        public double GetArea()
+        public virtual double GetArea()
         {
             return length * width;
         }
@@ -35,5 +35,9 @@ namespace BT_AUTO_2021_Programming
             Console.WriteLine("The rectangule sith length {0} and width {1} has arae {2}", length, width, GetArea());
         }
 
+        public override string ToString()
+        {
+            return "This is a rectangle with  " + width + "width and" + length + "length !!";
+        }
     }
 }

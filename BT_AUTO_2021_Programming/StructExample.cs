@@ -14,7 +14,7 @@ namespace BT_AUTO_2021_Programming
             public void Assign(int number, string testString)
             {
                 this.number = number;
-                this.teststring = teststring;
+                this.teststring = testString;
             }
 
             public int ComputeSum()

@@ -51,7 +51,7 @@ namespace BT_AUTO_2021_Programming
         {
             Console.WriteLine("Name of the persone is {0}", name);
             Console.WriteLine("-> Current state for hungry is {0}", isHungry);
-            Console.WriteLine("Person sex is {0}", sex);
+            Console.WriteLine("-> Person sex is {0}", sex);
         }
     }
 
