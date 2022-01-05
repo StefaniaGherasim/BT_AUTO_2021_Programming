@@ -1,4 +1,5 @@
 ﻿ using System;
+using System.Collections.Generic;
 
 namespace BT_AUTO_2021_Programming
 {
@@ -10,7 +11,9 @@ namespace BT_AUTO_2021_Programming
             //Course02(args);
             //Course03(args);
             //Course04();
-            Course05();
+            // Course05();
+
+            Course07();
         }
 
         static void Course01(string[] args)
@@ -386,6 +389,93 @@ namespace BT_AUTO_2021_Programming
             student1.PrintStudent();
         }
 
+        private static void Course07()
+        {
+            Square s1 = new Square();
+            Rectangle r1 = new Rectangle();
+            Shape sh1 = new Shape();
+
+            //polymorphism
+            IShape s2 = new Square();
+            IShape r2 = new Rectangle();
+            IShape sh2 = new Shape();// nu exista  IShape sh = new IShape()
+
+
+            List<string> lista= new List<string>();
+            List<IShape> shapeList = new List<IShape>();
+            shapeList.Add(s2);
+            shapeList.Add(r2);
+            shapeList.Add(sh2);
+            shapeList.Add(s1);
+
+            s1.Draw();
+            s2.Draw();
+            s2.State();
+            ((AbstractShape)s2).DoSomthing();
+
+            s1.PrintSquare();
+            ((Square)s2).PrintSquare();
+
+            //example of using polimorphism
+            Shape sh3;
+            string type = "rectangle";
+
+            switch (type)
+            {
+                case "square":
+                    {
+                        sh3 = new Square();
+                        break;
+                    }
+                case "rectangle":
+                    {
+                        sh3 = new Rectangle();
+                        break;
+                    }
+                default:
+                    {
+                        sh3 = new Shape();
+                        break;
+                    }
+            }
+            sh3.Draw();
+            sh3.Erase();
+            IIntf ob1 = new MyParticularShape();
+            IClass ob2 = new MyParticularShape();
+            ob1.Print();
+            ob2.Print();
+
+            PartialClass pc = new PartialClass();
+            pc.Method1();
+            pc.Method2();
+
+
+            /* //without polymorpfism  --  DO NOT DO THIS!!!
+
+             Square s3 = new Square();
+             Rectangle r3 = new Rectangle();
+             Shape sh4 = new Shape();
+
+             switch (type)
+             {
+                 case "square":
+                     {
+                         s3.Draw();
+                         break
+                     }
+                 case "rectangle":
+                     {
+                         r3.Draw();
+                         break;
+                     }
+                 default:
+                     {
+                         sh4.Draw();
+                         break;
+                     }
+             }*/
+
+        }
          
         public static void DrawFullShape(int width, int height)
         {

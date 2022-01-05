@@ -39,5 +39,10 @@ namespace BT_AUTO_2021_Programming
         {
             return "This is a rectangle with  " + width + "width and" + length + "length !!";
         }
+
+        public override void Draw()
+        {
+            Console.WriteLine("Drawing a rectangle");
+        }
     }
 }
