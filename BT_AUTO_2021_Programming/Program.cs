@@ -17,9 +17,17 @@ namespace BT_AUTO_2021_Programming
             //Course02(args);
             //Course03(args);
             //Course04();
-            // Course05();
+            //Course05();
             //Course07();
-            Course08();
+            //Course08();
+            try
+            {
+                Course09(args);
+            }
+            catch
+            {
+                Console.WriteLine("exception");
+            }
         }
 
         static void Course01(string[] args)
@@ -590,7 +598,66 @@ namespace BT_AUTO_2021_Programming
            
         }
 
+        public static void Course09(string[] args)
+        {
+            try
+            {
+                Console.WriteLine(args[1]);
+                int x = int.Parse(args[0]);
+                int z = 7 / x;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("index out of bounds");// este recomandat sa punem catch'urile particulare inaintea celei generale
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine("Failed to convert to INT");
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine("Can not devide by 0!");
+            }
+            catch( Exception ex)
+            {
+           
+                Console.WriteLine("The value can not be conveted to int!");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+
+            finally
+            {
+                Console.WriteLine("The finally block always executes!");
+            }
+
+
+            Shape sh = new Shape();
+            try
+            {
+                sh.Draw();
+               
+            }
+            finally
+            {
+                sh.Dispose();
+            }
+
+            using(Shape s2 = new Shape()) // this is equivalent to try finally
+            {
+                s2.Draw();
+            }
+
+            throw new BtException();
+
+
+        }
+         private static void RecursiveMethod()
+        {
+            RecursiveMethod();
+        }
          
+
         public static void DrawFullShape(int width, int height)
         {
             for (int j = 0; j < height; j++)
