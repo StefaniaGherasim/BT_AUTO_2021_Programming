@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BT_AUTO_2021_Programming", "BT_AUTO_2021_Programming\BT_AUTO_2021_Programming.csproj", "{12246554-955B-4AF2-A8ED-A10336E55BE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit_Auto_2022", "NUnit_Auto_2022\NUnit_Auto_2022.csproj", "{843E5F30-3092-48B5-B6FE-D8B044F62833}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnit_Auto_2022", "NUnit_Auto_2022\NUnit_Auto_2022.csproj", "{843E5F30-3092-48B5-B6FE-D8B044F62833}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTestAuto2022", "MSTestAuto2022\MSTestAuto2022.csproj", "{FFC0553A-143A-44DC-BCB3-12A5B0C862A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xunitauto2022", "Xunitauto2022\Xunitauto2022.csproj", "{B526614A-AC96-4E27-89F2-4BCA0A048961}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{843E5F30-3092-48B5-B6FE-D8B044F62833}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{843E5F30-3092-48B5-B6FE-D8B044F62833}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{843E5F30-3092-48B5-B6FE-D8B044F62833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFC0553A-143A-44DC-BCB3-12A5B0C862A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFC0553A-143A-44DC-BCB3-12A5B0C862A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFC0553A-143A-44DC-BCB3-12A5B0C862A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFC0553A-143A-44DC-BCB3-12A5B0C862A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B526614A-AC96-4E27-89F2-4BCA0A048961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B526614A-AC96-4E27-89F2-4BCA0A048961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B526614A-AC96-4E27-89F2-4BCA0A048961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B526614A-AC96-4E27-89F2-4BCA0A048961}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
