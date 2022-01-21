@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -24,7 +26,46 @@ namespace NUnit_Auto_2022
         [SetUp]
         public void Setup()
         {
-            driver = new ChromeDriver();
+            //driver = new ChromeDriver();
+
+            //Chrome
+            var options = new ChromeOptions();
+            //options.AddArgument("--start-maximized"); //va porni browserul direct maximizat
+            //options.AddArgument("headless");
+            options.AddArgument("ignor-certificate-errors");
+            var proxy = new Proxy();
+            proxy.HttpProxy = "127.0.0.1:8080";
+            proxy.IsAutoDetect = false;
+            //options.Proxy = proxy;
+            //options.AddExtension("C:\\Users\\Aaron\\Downloads\\Unconfirmed 695347.crdownload"); // deschide chrome cu extensia indicata
+
+            //Firefox
+            //e indicat sa folosesti metoda cu liste (ex:firefox) statice
+            var firefoxOptions = new FirefoxOptions();
+            string[] optionList =
+            {
+                //"--headles",
+                "--ignor-certificate-errors",
+                "--no-sandbox",
+                "--disable-gpu"
+            };
+            firefoxOptions.AddArguments(optionList);
+            FirefoxProfile fProfile = new FirefoxProfile();
+            fProfile.AddExtension("C:\\Users\\Aaron\\Downloads\\Unconfirmed 730345.crdownload");
+            firefoxOptions.Profile = fProfile;
+
+
+            //Edge 
+            var edgeOptions = new EdgeOptions();
+            //edgeOptions.AddExtension("C:\\Users\\Aaron\\Downloads\\Unconfirmed 695347.crdownload"");
+            edgeOptions.AddArguments("args", "['--start-maximized'], '--headless'");
+            edgeOptions.AddArgument("headless");
+
+            driver = new ChromeDriver(options);
+            //driver = new FirefoxDriver(firefoxOptions);
+            //driver = new EdgeDriver(edgeOptions);
+            driver.Manage().Window.Maximize(); // face maximize din fereastra cu ajutorul butonului de maximize
+
         }
 
         [TestCase("dinosaur", "dinosaurpassword", "", "")]
@@ -137,7 +178,56 @@ namespace NUnit_Auto_2022
 
 
         }
-    
+
+        [Test]
+        public void Test06()
+        {
+            driver.Navigate().GoToUrl("https://magazinulcolectionarului.ro/");
+
+            var cookies = driver.Manage().Cookies;
+            Console.WriteLine("The site contains {0} cookies", cookies.AllCookies.Count);
+            Utils.PrintCookies(cookies);
+           
+            Cookie myCookie = new Cookie("myCookie", "blablabla");
+            cookies.AddCookie(myCookie);
+            Utils.PrintCookies(cookies);
+
+            var ck = cookies.GetCookieNamed("PHPSESSID");
+            Console.WriteLine("Cookie name {0} and value {1}", ck.Name, ck.Value);
+
+
+            
+            cookies.DeleteAllCookies();
+            Console.WriteLine("The site contins {0} cookies", cookies.AllCookies.Count);
+
+            Utils.TakeScreenshotWithDate(driver, "C:\\Stefania\\screenShot", "screenshot", ScreenshotImageFormat.Png);
+
+        }
+
+        [Test]
+        public void Test07()
+        {
+            driver.Navigate().GoToUrl("http://86.121.249.150:4999/#/alert");
+            var alertButton = driver.FindElement(By.Id("alert-trigger"));
+            var confirmButton = driver.FindElement(By.Id("confirm-trigger"));
+            var promptButton = driver.FindElement(By.Id("prompt-trigger"));
+
+            alertButton.Click();
+            IAlert alert = driver.SwitchTo().Alert();
+            Console.WriteLine(alert.Text);
+            alert.Accept();
+
+            confirmButton.Click();
+            alert = driver.SwitchTo().Alert();
+            Console.WriteLine(alert.Text);
+            alert.Dismiss();
+
+            promptButton.Click();
+            alert = driver.SwitchTo().Alert();
+            Console.WriteLine(alert.Text);
+            alert.SendKeys("alex");
+            alert.Accept();
+        }
 
         [TearDown]
         public void Teardown()
