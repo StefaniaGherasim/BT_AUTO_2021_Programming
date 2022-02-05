@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -113,7 +114,7 @@ namespace NUnit_Auto_2022
 
         //implicity wait test  -la nivelul browserului
         [Test]
-        public void Test02()
+        public void Test02()//gasirea elementelor in pagina
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
 
@@ -205,7 +206,7 @@ namespace NUnit_Auto_2022
         }
 
         [Test]
-        public void Test07()
+        public void Test07()//alerta
         {
             driver.Navigate().GoToUrl("http://86.121.249.150:4999/#/alert");
             var alertButton = driver.FindElement(By.Id("alert-trigger"));
@@ -222,11 +223,96 @@ namespace NUnit_Auto_2022
             Console.WriteLine(alert.Text);
             alert.Dismiss();
 
-            promptButton.Click();
+            promptButton.Click(); // doar aici se poate pune sendkeys
             alert = driver.SwitchTo().Alert();
             Console.WriteLine(alert.Text);
             alert.SendKeys("alex");
             alert.Accept();
+        }
+
+        [Test]
+        public void Test08()//hoverul expandeaza elemente in pagina,  
+        {
+            driver.Navigate().GoToUrl(url + "hover");
+
+            //Metoda1
+            //var hoverButton = driver.FindElement(By.CssSelector("#root > div > div.content > div > div.container-table.text-center.container > div > button"));
+            //Actions actions = new Actions(driver);
+            //action = action.MoveToElement(hoverButton);
+            //IAction action = action.Build();
+            //action.Perform();
+            //Thread.Sleep(1000);//nu e indicat a se folosi in cod, il folosim doar daca vrem sa facem un delay pentrua  vedea testul
+
+            //Metoda2
+            var hoverButton = driver.FindElement(By.ClassName("btn-outline-info"));
+
+            Actions actions = new Actions(driver);
+            actions.MoveToElement(hoverButton).Build().Perform();//muta mouseul pe buton, actions nbuild perform-- se foloseste si pentru butoanele cu drag and drop
+
+            var catSelect = driver.FindElement(By.Id("Cat"));//selectan butonul cat dupa id
+            catSelect.Click();//apasa click pen butonul cat
+
+            var resultText = driver.FindElement(By.Id("result")).Text;//identifica mesajul dupa apasarea butonului
+
+            Assert.AreEqual("You last clicked the Cat", resultText);
+
+            var allItems = driver.FindElements(By.ClassName("clickable"));//pentru toate elementele din butonul hover
+            foreach (var item in allItems)
+            {
+                item.Click();
+                var text = item.Text;
+                var resultTxt = driver.FindElement(By.Id("resuly")).Text;
+                Assert.AreEqual(String.Format("You last clicked the {0}", text), resultTxt);
+                //Thread.Sleep(2000);//nu e indicat a se folosi in cod, il folosim doar daca vrem sa facem un delay pentrua  vedea testul
+            }
+
+        }
+
+        [Test]
+        public void Test09()//stale elements (stale button)
+        {
+            driver.Navigate().GoToUrl(url + "stale");
+
+
+            //theating a stale element: find the element before every interaction !!
+            for (int i = 0; i<=100; i++)
+            {
+                var button = driver.FindElement(By.Id("stale-button"));
+                button.Click();
+            }
+
+            //javaScriptExecutar este ultima metoda pe care o folosim , orice avem cu drive. ... se paote executa si cu java
+            Utils.ExecuteJsScript(driver, "return document.title");
+            Utils.ExecuteJsScript(driver, "alert('enter correct login credentials to continue ');");
+        }
+
+        //javaScriptExecutar este ultima metoda pe care o folosim 
+
+        [Test]
+        public void Test10()//shimbarea ferestrei
+        {
+            driver.Navigate().GoToUrl(url); // merge pe pagina principala
+
+            //Creare de taburi noi(ctrl+t)
+            /*var body = driver.FindElement(By.TagName("body"));
+            body.SendKeys(Keys.Control);
+            body.SendKeys("t");*/
+
+            foreach (var handle in driver.WindowHandles)  //read only colections de tip string
+            {
+                driver.SwitchTo().Window(handle);
+                Console.WriteLine(handle);
+            }
+        }
+
+        [Test]
+        public void Test11()//switching frames , se foloseste in pagina de contact unde avem harta cu sediul firmei (iframe)
+        {
+            driver.Navigate().GoToUrl("https://www.vexio.ro/info/despre-noi/contact/");
+
+            var iframe = driver.FindElement(By.TagName("iframe"));
+
+            driver.SwitchTo().Frame(iframe);//este pagina in pagina, prin switchto te duce la pagina din pagina
         }
 
         [TearDown]
