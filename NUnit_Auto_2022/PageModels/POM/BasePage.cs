@@ -1,10 +1,17 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NUnit_Auto_2022.PageModels.PageFactory.POM
+namespace NUnit_Auto_2022.PageModels.POM
 {
-    class BasePage
+    public class BasePage//Putem definii constante
     {
+        public IWebDriver driver;
+
+        public BasePage(IWebDriver driver)
+        {
+            this.driver = driver;
+        }
     }
 }

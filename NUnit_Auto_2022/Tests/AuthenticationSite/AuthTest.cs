@@ -10,18 +10,9 @@ using System.Text;
 
 namespace NUnit_Auto_2022.Tests
 {
-    class AuthTest
+    class AuthTest : BaseTest
     {
-        IWebDriver driver;
-
         string url = FrameworkConstants.GetUrl();
-
-        [SetUp]
-        public void Setup()
-        {
-            driver = new ChromeDriver();
-        }
-
 
         // test authentication with page object model (pom)
         [Test]
@@ -46,13 +37,6 @@ namespace NUnit_Auto_2022.Tests
             lp.Login("user1", "pass1");
 
         }//testele pt pom si pentru page factory sunt la fel 
-
-
-        [TearDown]
-        public void TearDown()
-        {
-            driver.Quit();
-        }
 
     }
 }

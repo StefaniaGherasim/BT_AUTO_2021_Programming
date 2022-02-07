@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NUnit_Auto_2022.PageModels.POM
 {
-    public class LandingPage
+    public class LandingPage : BasePage
     {
         const string authButtonSelector = "hidden-sm"; // class
         const string authPopupSelector = "nav-stacked"; // class
@@ -17,11 +17,8 @@ namespace NUnit_Auto_2022.PageModels.POM
         const string serachButtonSelector = "btn-primary"; // class  
         const string checkPageSelector = "h1 ";//tag
 
-        IWebDriver driver;
-
-        public LandingPage(IWebDriver driver)
+        public LandingPage(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
         }
 
         public string CheckPage()

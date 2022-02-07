@@ -8,21 +8,14 @@ using System.Text;
 
 namespace NUnit_Auto_2022.Tests
 {
-    class EcomTestSite
+    class EcomTestSite : BaseTest
     {
-        IWebDriver driver;
         //https://www.abdcomputer.ro/
-
-        [SetUp]
-        public void SetUp()
-        {
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://www.abdcomputer.ro/");
-        }
 
         [Test]
         public void LoginTest()
         {
+            driver.Navigate().GoToUrl("https://www.abdcomputer.ro/");
             LandingPage lp = new LandingPage(driver);
             Assert.AreEqual("Produse IT Renew, Refurbish, Noi & SH", lp.CheckPage());
             lp.LoginNavigate();
@@ -31,6 +24,7 @@ namespace NUnit_Auto_2022.Tests
         [Test]
         public void RegisterUnchecked()
         {
+            driver.Navigate().GoToUrl("https://www.abdcomputer.ro/");
             LandingPage lp = new LandingPage(driver);
             lp.LoginNavigate();
             RegisterPage rp = new RegisterPage(driver);
@@ -44,14 +38,8 @@ namespace NUnit_Auto_2022.Tests
         public void x()
          {
 
-            }
+         }
 
-
-        [TearDown]
-        public void TearDown()
-        {
-            driver.Quit();
-        }
     }
 
 }

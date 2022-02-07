@@ -12,16 +12,19 @@ namespace NUnit_Auto_2022.Tests
     class BaseTest
     {
         public IWebDriver driver;
+        // befor each test
         [SetUp]
         public void Setup()
         {
-
-            driver = Browser.GetDriver(WebBrowsers.Chrome);
-            driver = Browser.GetDriver(WebBrowsers.FireFox);
-            //driver = new ChromeDriver();
+            //instantiate the browser using the browser factory class created in utilities
+           driver = Browser.GetDriver(webBrowsers.Chrome);
+           // driver = Browser.GetDriver(webBrowsers.Firefox);
+           //driver = Browser.GetDriver(webBrowsers.Edge);
+           // driver = new ChromeDriver();
            // driver = new EdgeDriver();
         }
 
+        //after each test
         [TearDown]
         public void TearDown()
         {
