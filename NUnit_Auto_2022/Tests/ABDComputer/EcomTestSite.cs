@@ -28,17 +28,10 @@ namespace NUnit_Auto_2022.Tests
             LandingPage lp = new LandingPage(driver);
             lp.LoginNavigate();
             RegisterPage rp = new RegisterPage(driver);
-            Assert.AreEqual("Sunt client nou", rp.CheckPage());//verifica daca sunt pe pagina care trebuie
+            Assert.AreEqual("Sunt client nou", rp.CheckPage());
             rp.AcceptCookies();
-            rp.Register("aaa", "bbbb", "0752000000", "aaaaaaaa@bt.ro", "pass123");
-            //rp.Register("aaa", "bbbb", "0752000000", "aaaaaaaa@bt.ro", "pass123", "");//cu parametru optional
+            rp.Register("aaaa", "bbbb", "077777770", "aaaa@aaaa.com", "Abc123$");
         }
-
-        [Test]
-        public void x()
-         {
-
-         }
 
     }
 

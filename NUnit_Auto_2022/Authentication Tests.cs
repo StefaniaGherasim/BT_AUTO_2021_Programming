@@ -188,8 +188,7 @@ namespace NUnit_Auto_2022
             var cookies = driver.Manage().Cookies;
             Console.WriteLine("The site contains {0} cookies", cookies.AllCookies.Count);
             Utils.PrintCookies(cookies);
-           
-            Cookie myCookie = new Cookie("myCookie", "blablabla");
+            Cookie myCookie = new Cookie("myCookie", "vineoaiapapalupu");
             cookies.AddCookie(myCookie);
             Utils.PrintCookies(cookies);
 
@@ -197,11 +196,10 @@ namespace NUnit_Auto_2022
             Console.WriteLine("Cookie name {0} and value {1}", ck.Name, ck.Value);
 
 
-            
             cookies.DeleteAllCookies();
-            Console.WriteLine("The site contins {0} cookies", cookies.AllCookies.Count);
+            Console.WriteLine("The site contains {0} cookies", cookies.AllCookies.Count);
 
-            Utils.TakeScreenshotWithDate(driver, "C:\\Stefania\\screenShot", "screenshot", ScreenshotImageFormat.Png);
+            Utils.TakeScreenshotWithDate(driver, "C:\\Temp", "screenshot", ScreenshotImageFormat.Png);
 
         }
 
@@ -261,7 +259,7 @@ namespace NUnit_Auto_2022
             {
                 item.Click();
                 var text = item.Text;
-                var resultTxt = driver.FindElement(By.Id("resuly")).Text;
+                var resultTxt = driver.FindElement(By.Id("result")).Text;
                 Assert.AreEqual(String.Format("You last clicked the {0}", text), resultTxt);
                 //Thread.Sleep(2000);//nu e indicat a se folosi in cod, il folosim doar daca vrem sa facem un delay pentrua  vedea testul
             }

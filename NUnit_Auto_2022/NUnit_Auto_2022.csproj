@@ -21,7 +21,10 @@
 
   <ItemGroup>
     <Folder Include="Other\ExtensionFile\" />
-    <Folder Include="TestData\" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy/y/f$(ProjectDir)config-properties $(ProjectDir)$(OutDir)config.properties &amp;&#xD;&#xA;xcopy /y $(ProjectDir)\TestData\*.* $(ProjectDir)$(OutDir)\TestData\*.*" />
+  </Target>
 
 </Project>
