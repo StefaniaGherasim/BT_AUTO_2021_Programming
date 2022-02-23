@@ -209,9 +209,9 @@ namespace NUnit_Auto_2022
         {
             List<string> files = new List<string>();
             DirectoryInfo di = new DirectoryInfo(path);
-            foreach (FileInfo fi in di.GetFiles(extension, System.IO.SearchOption.TopDirectoryOlny))
+            foreach (FileInfo fi in di.GetFiles(extension, System.IO.SearchOption.TopDirectoryOnly))
             {
-                files.Add(fi.FullName);
+                files.Add(fi.FullName); // returneaza toate fisierele xml din calea respectiva
             }
             return files;
         }

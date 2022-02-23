@@ -10,6 +10,7 @@ using System.Text;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using MySql.Data.MySqlClient;
 
 namespace NUnit_Auto_2022.Tests
 {
@@ -17,6 +18,7 @@ namespace NUnit_Auto_2022.Tests
     {
         string url = FrameworkConstants.GetUrl();
 
+        //not recomended
         private static IEnumerable<TestCaseData> GetCredentialsData()//furnizeaza date de test
         {
             yield return new TestCaseData("user1", "pass1");
@@ -35,7 +37,7 @@ namespace NUnit_Auto_2022.Tests
                 {
                     var line = reader.ReadLine();
                     var value = line.Split(',');
-                    if (index > 0)
+                    if (index > 0)//exclude capul de tabel din test
                     {
                         yield return new TestCaseData(value[0], value[1]);
                     }
@@ -74,7 +76,7 @@ namespace NUnit_Auto_2022.Tests
         private static IEnumerable<TestCaseData> GetCredentialsDataJson()
         {
            // DataModels.Credentials credentials = Utils.JsonRead<DataModels.Credentials>("TestData\\crededntials.json");
-            var credentials = Utils.JsonRead<DataModels.Credentials>("TestData\\crededntials.json");
+            var credentials = Utils.JsonRead<DataModels.Credentials>("TestData\\credentials.json");
             yield return new TestCaseData(credentials.Username, credentials.Password);
         }
 
@@ -84,7 +86,7 @@ namespace NUnit_Auto_2022.Tests
             foreach (var file in Utils.GetAllFilesInFolderExt("TestData\\", "*.xml"))
             {
                 Console.WriteLine("Testing with file:" + file);
-                using (Stream reader = new FileStream("TestData\\Credentials.xml", FileMode.Open))
+                using (Stream reader = new FileStream("TestData\\credentials.xml", FileMode.Open))
                 {
                     var credentials = (DataModels.Credentials)serializer.Deserialize(reader);
                     yield return new TestCaseData(credentials.Username, credentials.Password);
@@ -93,8 +95,50 @@ namespace NUnit_Auto_2022.Tests
 
         }
 
+        private static IEnumerable<TestCaseData> GetCredentialsDB()
+        {
+            //read the connection string ("server=86.121.249.150;port=3306;database=test;user=root;password=SiitBuc2021$")from json in conDetails variable
+            DataModels.DBConnString connString = Utils.JsonRead<DataModels.DBConnString>("appsettings.json");
+            String conDetails = connString.ConnectionStrings.DefaultConnection;//represinta din json textul de la default...
+            using (MySqlConnection con = new MySqlConnection(conDetails))//am efectuat conectarea la baza de date
+            {
+                //opening connection
+                con.Open();
+                //prepare to run the quiery in the database
+                string query = "select username, password from test.credentialsSG;";
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                //run the query in the database and get the data row by row
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        yield return new TestCaseData(reader["username"].ToString(), reader["password"].ToString());
+                    }
+                }
+
+            }
+        }
+
+        private static IEnumerable<TestCaseData> GetCredentialsDbEf()
+        {
+            //read the connection string ("server=86.121.249.150;port=3306;database=test;user=root;password=SiitBuc2021$")from json in conDetails variable
+            DataModels.DBConnString connString = Utils.JsonRead<DataModels.DBConnString>("appsettings.json");
+            String conDetails = connString.ConnectionStrings.DefaultConnection;//represinta din json textul de la default...
+            //map the DB table to EF model
+            using(var context = new Other.CredentialsDbContext(conDetails))
+            {
+                var credentials = context.credentialsSG;
+                foreach( var cred in credentials)
+                {
+                    yield return new TestCaseData(cred.Username, cred.Password);
+                }
+
+            }
+
+        }
+
         // test authentication with page object model (pom)
-        [Test, TestCaseSource("GetCredentialsDataXml")]
+        [Test, TestCaseSource("GetCredentialsDbEf")]
         public void BasicAuth(string username, string password)//contine instantieri de pagini, apleluri catre paginile respective si aserturi 
         {
             // driver.Navigate().GoToUrl("http://86.121.249.150:4999/#/login");//navigam pe pagina
@@ -106,12 +150,12 @@ namespace NUnit_Auto_2022.Tests
         }
 
 
-        private static string[] GetUsername = new string[]
+        private static string[] GetUsername = new string[]//array static
         {
-"user1", "user2", "user3", "user4"
+            "user1", "user2", "user3", "user4"
         };
 
-        private static string[] GetPassword = new string[]
+        private static string[] GetPassword = new string[]//array static
        {
            "pass1", "pass2", "pass3", "pass4"
        };
