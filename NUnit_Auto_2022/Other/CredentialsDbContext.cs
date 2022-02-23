@@ -7,7 +7,7 @@ namespace NUnit_Auto_2022.Other
 {
     class CredentialsDbContext : DbContext
     {
-        public DbSet<DataModels.EFModels.CredentialsSG> credentialsSG { get; set; }
+        public DbSet<DataModels.EFModels.CredentialsSG> credentialsSG { get; set; } //trebuie sa fie exact numele tabelei din sql
         private string connectionString;
 
         //constructor default, use base constructor with options

@@ -97,9 +97,7 @@ namespace NUnit_Auto_2022.Tests
 
         private static IEnumerable<TestCaseData> GetCredentialsDB()
         {
-            //read the connection string ("server=86.121.249.150;port=3306;database=test;user=root;password=SiitBuc2021$")from json in conDetails variable
-            DataModels.DBConnString connString = Utils.JsonRead<DataModels.DBConnString>("appsettings.json");
-            String conDetails = connString.ConnectionStrings.DefaultConnection;//represinta din json textul de la default...
+            // conecting to DB
             using (MySqlConnection con = new MySqlConnection(conDetails))//am efectuat conectarea la baza de date
             {
                 //opening connection
@@ -119,13 +117,11 @@ namespace NUnit_Auto_2022.Tests
             }
         }
 
-        private static IEnumerable<TestCaseData> GetCredentialsDbEf()
+        private static IEnumerable<TestCaseData> GetCredentialsDbEf()// de preferat pt utilizat
         {
-            //read the connection string ("server=86.121.249.150;port=3306;database=test;user=root;password=SiitBuc2021$")from json in conDetails variable
-            DataModels.DBConnString connString = Utils.JsonRead<DataModels.DBConnString>("appsettings.json");
-            String conDetails = connString.ConnectionStrings.DefaultConnection;//represinta din json textul de la default...
+            
             //map the DB table to EF model
-            using(var context = new Other.CredentialsDbContext(conDetails))
+            using (var context = new Other.CredentialsDbContext(conDetails))
             {
                 var credentials = context.credentialsSG;
                 foreach( var cred in credentials)
@@ -147,6 +143,8 @@ namespace NUnit_Auto_2022.Tests
             PageModels.POM.LoginPage lp = new PageModels.POM.LoginPage(driver);//am folosit PageModels.POM. ...deoarece avem doua pagini cu acelasi nume dar in diferite clase (aceasta e POM-page object model) 
             Assert.AreEqual("Authentication", lp.CheckPage());// verifica daca suntem pe pagina care trebuie 
             lp.Login(username, password);//user1 si pass1 sunt valorile care se dau pentru verificare
+
+            
         }
 
 
@@ -154,7 +152,7 @@ namespace NUnit_Auto_2022.Tests
         {
             "user1", "user2", "user3", "user4"
         };
-
+         
         private static string[] GetPassword = new string[]//array static
        {
            "pass1", "pass2", "pass3", "pass4"
@@ -169,6 +167,7 @@ namespace NUnit_Auto_2022.Tests
             Assert.AreEqual("Authentication", lp.CheckPage());
             lp.Login(username, password);
 
+            Console.WriteLine(conDetails);
         }//testele pt pom si pentru page factory sunt la fel 
 
     }

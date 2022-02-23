@@ -12,16 +12,22 @@ namespace NUnit_Auto_2022.Tests
     class BaseTest
     {
         public IWebDriver driver;
+        public static string conDetails;
         // befor each test
         [SetUp]
         public void Setup()
         {
             //instantiate the browser using the browser factory class created in utilities
            driver = Browser.GetDriver(webBrowsers.Chrome);
-           // driver = Browser.GetDriver(webBrowsers.Firefox);
-           //driver = Browser.GetDriver(webBrowsers.Edge);
-           // driver = new ChromeDriver();
-           // driver = new EdgeDriver();
+            // driver = Browser.GetDriver(webBrowsers.Firefox);
+            //driver = Browser.GetDriver(webBrowsers.Edge);
+            // driver = new ChromeDriver();
+            // driver = new EdgeDriver();
+
+            //read the connection string ("server=86.121.249.150;port=3306;database=test;user=root;password=SiitBuc2021$")from json in conDetails variable
+           DataModels.DBConnString connString = Utils.JsonRead<DataModels.DBConnString>("appsettings.json");
+           conDetails = Utils.Decrypt(connString.ConnectionStrings.DefaultConnection, "btauto2022");
+          
         }
 
         //after each test
