@@ -41,7 +41,7 @@ namespace NUnit_Auto_2022.Tests
                     {
                         yield return new TestCaseData(value[0], value[1]);
                     }
-                   
+
                     index++;
                 }
             }
@@ -58,7 +58,7 @@ namespace NUnit_Auto_2022.Tests
         private static IEnumerable<TestCaseData> GetCredentialsDataCSV3()
         {
             var csvData = Utils.GetDataTableFromCsv("TestData\\credentials.csv");
-                for(int i=0; i< csvData.Rows.Count; i++)
+            for (int i = 0; i < csvData.Rows.Count; i++)
             {
                 yield return new TestCaseData(csvData.Rows[i].ItemArray);
             }
@@ -67,7 +67,7 @@ namespace NUnit_Auto_2022.Tests
         private static IEnumerable<TestCaseData> GetCredentialsDataExcel()
         {
             var excelData = Utils.GetDataTableFromExcel("TestData\\credentials.xlsx");
-            for(int i = 0; i < excelData.Rows.Count; i++)
+            for (int i = 0; i < excelData.Rows.Count; i++)
             {
                 yield return new TestCaseData(excelData.Rows[i].ItemArray);
             }
@@ -75,7 +75,7 @@ namespace NUnit_Auto_2022.Tests
 
         private static IEnumerable<TestCaseData> GetCredentialsDataJson()
         {
-           // DataModels.Credentials credentials = Utils.JsonRead<DataModels.Credentials>("TestData\\crededntials.json");
+            // DataModels.Credentials credentials = Utils.JsonRead<DataModels.Credentials>("TestData\\crededntials.json");
             var credentials = Utils.JsonRead<DataModels.Credentials>("TestData\\credentials.json");
             yield return new TestCaseData(credentials.Username, credentials.Password);
         }
@@ -127,7 +127,7 @@ namespace NUnit_Auto_2022.Tests
             using (var context = new Other.CredentialsDbContext(FrameworkConstants.decryptedCon))
             {
                 var credentials = context.credentialsSG;
-                foreach( var cred in credentials)
+                foreach (var cred in credentials)
                 {
                     yield return new TestCaseData(cred.Username, cred.Password);
                 }
@@ -137,7 +137,10 @@ namespace NUnit_Auto_2022.Tests
         }
 
         // test authentication with page object model (pom)
-        [Test, TestCaseSource("GetCredentialsDbEf")]
+
+        [Category("AuthWithDb")]
+        /*[Category("Smoke")]*/ // categoria de test se poate pune si separat sau se paote pune direct in linia cu test
+        [Test, TestCaseSource("GetCredentialsDbEf"), Order(1), Category("Smoke")]
         public void BasicAuth(string username, string password)//contine instantieri de pagini, apleluri catre paginile respective si aserturi 
         {
             // driver.Navigate().GoToUrl("http://86.121.249.150:4999/#/login");//navigam pe pagina
@@ -147,7 +150,7 @@ namespace NUnit_Auto_2022.Tests
             Assert.AreEqual("Authentication", lp.CheckPage());// verifica daca suntem pe pagina care trebuie 
             lp.Login(username, password);//user1 si pass1 sunt valorile care se dau pentru verificare
 
-            
+
         }
 
 
@@ -155,14 +158,16 @@ namespace NUnit_Auto_2022.Tests
         {
             "user1", "user2", "user3", "user4"
         };
-         
+
         private static string[] GetPassword = new string[]//array static
        {
            "pass1", "pass2", "pass3", "pass4"
        };
 
         //test authentication with page factory
-        [Test]
+        [Category("AuthPageFactory")]
+        /*[Category("Smoke")]*/
+        [Test, Order(2), Category("Smoke")]//order (2) inseamna ca este al doilea in ordinea testelor
         public void BasicAuthPf([ValueSource("GetUsername")] string username, [ValueSource("GetPassword")] string password)
         {
             driver.Navigate().GoToUrl(url + "login");
