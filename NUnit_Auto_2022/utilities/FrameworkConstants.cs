@@ -20,6 +20,8 @@ namespace NUnit_Auto_2022.Utilities
        public const bool ignotCertErr = true;
        public const bool startWithExtension = false;
 
+       public static string decryptedCon = Utils.Decrypt(Utils.JsonRead<DataModels.DBConnString>("appsettings.json").ConnectionStrings.DefaultConnection, "btauto2022");
+
         public static string GetUrl()
         {
             return String.Format("{0}://{1}:{2}{3}", protocol, hostname, port, path);

@@ -25,8 +25,7 @@ namespace NUnit_Auto_2022.Tests
             // driver = new EdgeDriver();
 
             //read the connection string ("server=86.121.249.150;port=3306;database=test;user=root;password=SiitBuc2021$")from json in conDetails variable
-           DataModels.DBConnString connString = Utils.JsonRead<DataModels.DBConnString>("appsettings.json");
-           conDetails = Utils.Decrypt(connString.ConnectionStrings.DefaultConnection, "btauto2022");
+           
           
         }
 

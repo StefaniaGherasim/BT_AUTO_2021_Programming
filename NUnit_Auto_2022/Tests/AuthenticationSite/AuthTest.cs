@@ -97,8 +97,10 @@ namespace NUnit_Auto_2022.Tests
 
         private static IEnumerable<TestCaseData> GetCredentialsDB()
         {
+            /*DataModels.DBConnString connString = Utils.JsonRead<DataModels.DBConnString>("appsettings.json");
+            conDetails = Utils.Decrypt(connString.ConnectionStrings.DefaultConnection, "btauto2022");*/
             // conecting to DB
-            using (MySqlConnection con = new MySqlConnection(conDetails))//am efectuat conectarea la baza de date
+            using (MySqlConnection con = new MySqlConnection(FrameworkConstants.decryptedCon))//am efectuat conectarea la baza de date
             {
                 //opening connection
                 con.Open();
@@ -119,9 +121,10 @@ namespace NUnit_Auto_2022.Tests
 
         private static IEnumerable<TestCaseData> GetCredentialsDbEf()// de preferat pt utilizat
         {
-            
+            /*DataModels.DBConnString connString = Utils.JsonRead<DataModels.DBConnString>("appsettings.json");
+            conDetails = Utils.Decrypt(connString.ConnectionStrings.DefaultConnection, "btauto2022");*/
             //map the DB table to EF model
-            using (var context = new Other.CredentialsDbContext(conDetails))
+            using (var context = new Other.CredentialsDbContext(FrameworkConstants.decryptedCon))
             {
                 var credentials = context.credentialsSG;
                 foreach( var cred in credentials)
